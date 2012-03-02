@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.multipart.maxSize" value="5368709120"/>
+
+    <constant name="struts.convention.redirect.to.slash" value="false"/>
+    <constant name="struts.convention.result.path" value="/WEB-INF/views"/>
+    <constant name="struts.convention.package.locators" value="action"/>
+    <constant name="struts.convention.package.locators.basePackage" value="org.lanxy.webpower.action"/>
+    <constant name="struts.convention.default.parent.package" value="default"/>
+
+    <package name="default" extends="convention-default">
+        <default-interceptor-ref name="paramsPrepareParamsStack"/>
+        <global-exception-mappings>
+            <exception-mapping result="global-error" exception="java.lang.Exception"/>
+        </global-exception-mappings>
+    </package>
+</struts>
