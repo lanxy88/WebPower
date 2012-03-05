@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.StrutsStatics;
+import org.springframework.util.FileCopyUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -84,6 +86,25 @@ public class BaseAction implements Action {
     protected String renderJson(Object param)
     {
         return JSON.toJSONString(param);
+    }
+
+    /**
+     * 向客户端发送文件
+     * @param file
+     */
+    protected void sendFile(File file) throws IOException {
+        HttpServletResponse response = ServletActionContext.getResponse();
+        if(file!=null && file.exists())
+        {
+            long modified = file.lastModified();
+            response.setDateHeader("Last-Modified",modified);
+            response.setContentLength((int)file.length());
+            FileCopyUtils.copy(new FileInputStream(file),response.getOutputStream());
+        }else
+        {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND,"file not found");
+        }
+
     }
 
 }
