@@ -58,7 +58,7 @@ public class BaseAction implements Action {
     }
 
     /**
-     * 想页面发送哈希表
+     * 向页面发送哈希表
      * Freemarker，Jsp等
      * @param result
      * @return
